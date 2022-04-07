@@ -19,31 +19,20 @@ BEGIN
 -----giving each output bit a mux 2to1:------------------------	
 	f: for i in 0 to shift-1 generate -- from 0 to shift-1
 			mux_in1_vec(i) <= (sctr_LorR) and y(i+shift); -- shifting left or right according to ALUFN (LSB)
-		zeros : mux2_1 port map(
-			x0 => y(i),
-			x1 => mux_in1_vec(i),
-			ctr => shift_enable,
-			s => y_after(i)
-		);
+			y_after(i)<=(y(i) and not(shift_enable)) or (mux_in1_vec(i) and shift_enable); -- mux 2_1, shift_enable = ctr
+			
 	end generate;
+
 	rest : for i in shift to n-shift-1 generate -- from shift to n-shift-1
 		mux_in1_vec(i) <=((sctr_LorR) and y(i+shift)) or (not(sctr_LorR) and y(i-shift)); -- shifting left or right according to ALUFN (rest)
-		chain : mux2_1 port map(
-			x0 => y(i),
-			x1 => mux_in1_vec(i), 
-			ctr => shift_enable,
-			s => y_after(i)
-		);
+		y_after(i)<=(y(i) and not(shift_enable)) or (mux_in1_vec(i) and shift_enable); -- mux 2_1, shift_enable = ctr
+
 	end generate;
 
 	restish : for i in n-shift to n-1 generate -- from n-shit to n-1
 		mux_in1_vec(i) <=(not(sctr_LorR) and y(i-shift)); -- shifting left or right according to ALUFN (rest)
-		chain : mux2_1 port map(
-			x0 => y(i),
-			x1 => mux_in1_vec(i), 
-			ctr => shift_enable,
-			s => y_after(i)
-		);
+		y_after(i)<=(y(i) and not(shift_enable)) or (mux_in1_vec(i) and shift_enable); -- mux 2_1, shift_enable = ctr
+
 	end generate;
 	
 	s_cout <= ((y(n-shift) and not(sctr_LorR))or(y(shift-1) and sctr_LorR))and shift_enable  ; -- carry out from single shifter

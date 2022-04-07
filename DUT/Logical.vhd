@@ -13,21 +13,13 @@ END Logical;
 ARCHITECTURE dfl OF Logical IS
 begin
 -- The boolean Logic is in Documentation
-    case ALUFN is
-    when "000" => 
-        result <= not(y);
-    when "001" =>
-        result <= x or y;
-    when "010" =>
-        result <= x and y;
-    when "011" =>
-        result <= x xor y;
-    when "100" =>
-        result <= x nor y;
-    when "101" => 
-        result <= x nand y;
-    when others =>
-        result <= (others => '0');
-    end case;   
+    with ALUFN select
+        result <= not(y)   when "000",
+                  x or y   when "001",
+                  x and y  when "010",
+                  x xor y  when "011",
+                  x nor y  when "100",
+                  x nand y when "101",
+                  (others => '0')  when others;
 end dfl;
 
