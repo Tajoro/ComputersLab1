@@ -20,6 +20,6 @@ begin
                   x xor y  when "011",
                   x nor y  when "100",
                   x nand y when "101",
-                  (others => '0')  when others;
+                  unaffected; -- latch when others (spec demands)
 end dfl;
 
