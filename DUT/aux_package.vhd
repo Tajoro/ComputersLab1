@@ -31,7 +31,7 @@ package aux_package is
 	component ALU is
 	GENERIC (n : INTEGER := 8;
 			 k : integer := 3);     -- k=log2(n)
-	PORT (	 ALUFN: IN STD_LOGIC_VECTOR (1 DOWNTO 0); -- [1,dc]=Logical, [0,1]= shift, [0,0]= AdderSub.
+	PORT (	 ALUFN: IN STD_LOGIC_VECTOR (4 DOWNTO 0); --2 MSB bits [1,dc]=Logical, [1,0]= shift, [0,0]= AdderSub.
 			 logical,shifter,addersub: IN STD_LOGIC_VECTOR (n-1 DOWNTO 0); -- Input
              Cin: in STD_LOGIC_VECTOR(1 downto 0); --carry in 
              ALUout: OUT STD_LOGIC_VECTOR(n-1 downto 0); -- Result
@@ -42,7 +42,7 @@ package aux_package is
 	component Logical is
 	GENERIC (n : INTEGER := 8;
 			 k : integer := 3);     -- k=log2(n)
-	PORT (   ALUFN: IN STD_LOGIC_VECTOR (1 DOWNTO 0); -- decide which module is used. Logical ALUFN= TOP ALUFN[2:1]
+	PORT (   ALUFN: IN STD_LOGIC_VECTOR (2 DOWNTO 0); -- decide which module is used. Logical ALUFN= TOP ALUFN[2:1]
 			 y: IN STD_LOGIC_VECTOR (n-1 DOWNTO 0); -- Input
              x: IN STD_LOGIC_VECTOR (n-1 DOWNTO 0); -- Input
              result: OUT STD_LOGIC_VECTOR(n-1 downto 0)); -- Result
