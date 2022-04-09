@@ -47,12 +47,6 @@ package aux_package is
              x: IN STD_LOGIC_VECTOR (n-1 DOWNTO 0); -- Input
              result: OUT STD_LOGIC_VECTOR(n-1 downto 0)); -- Result
 	end component;
----------------------------Mux2to1------------------------------
-	component mux2_1 is
-	PORT (  x0,x1: IN STD_LOGIC;
-			ctr: IN STD_LOGIC;
-			s: OUT STD_LOGIC);
-	end component;	
 -----------------------AdderSubtractor--------------------------
 	component AdderSub is
 	GENERIC (n : INTEGER := 8);
