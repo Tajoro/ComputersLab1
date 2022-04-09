@@ -19,7 +19,6 @@ begin
                   x and y  when "010",
                   x xor y  when "011",
                   x nor y  when "100",
-                  x nand y when "101",
-                  unaffected; -- latch when others (spec demands)
+                  x nand y when others; -- "101"
 end dfl;
 

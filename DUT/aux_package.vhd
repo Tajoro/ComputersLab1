@@ -8,7 +8,7 @@ package aux_package is
 			 k : integer := 3;     -- k=log2(n)
 		     m : integer := 4	); -- m=2^(k-1)
 	PORT (  Y,X: IN STD_LOGIC_VECTOR (n-1 DOWNTO 0);
-		  ALUFN : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
+		  ALUFN : IN STD_LOGIC_VECTOR (4 DOWNTO 0);
 		  ALUout: OUT STD_LOGIC_VECTOR(n-1 downto 0);
 		  Nflag,Cflag,Zflag: OUT STD_LOGIC ); -- Zflag,Cflag,Nflag
 	end component;
@@ -50,7 +50,7 @@ package aux_package is
 -----------------------AdderSubtractor--------------------------
 	component AdderSub is
 	GENERIC (n : INTEGER := 8);
-	PORT (    sctr: IN STD_LOGIC; -- subtractor control , ADD = 0 , Sub=1
+	PORT (    sctr: IN STD_LOGIC_VECTOR (1 downto 0); -- subtractor control , ADD = 0 , Sub=1
 			x,y: IN STD_LOGIC_VECTOR (n-1 DOWNTO 0);
             cout: OUT STD_LOGIC;
             s: OUT STD_LOGIC_VECTOR(n-1 downto 0));
